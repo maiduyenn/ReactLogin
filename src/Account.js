@@ -12,8 +12,60 @@ import NoteAltOutlinedIcon from '@mui/icons-material/NoteAltOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import StarOutlineOutlinedIcon from '@mui/icons-material/StarOutlineOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import React from 'react';
+import React, { Children } from 'react';
 import useState from 'react';
+
+const basiclists = []
+const groupList = [
+    {
+        name: "GIỚI THIỆU & PHẢN HỒI",
+        children: [
+            {
+                icon: ErrorOutlineIcon,
+                content: "Giới thiệu trang"
+
+            },
+            {
+                icon: NoteAltOutlinedIcon,
+                content: "Hướng dẫn sử dụng"
+
+            },
+
+            {
+                icon: HelpOutlineOutlinedIcon,
+                content: "Câu hỏi thường gặp"
+
+            },
+
+            {
+                icon: StarOutlineOutlinedIcon,
+                content: "Đánh giá"
+
+            },
+
+            {
+                icon: ChatBubbleOutlineOutlinedIcon,
+                content: "Gửi góp ý cho nhà phát triển"
+
+            }
+        ]
+    },
+    {
+        name: "CÀI ĐẶT",
+        children: [
+            {
+                icon: SettingsOutlinedIcon,
+                content: "Cài đặt ngôn ngữ"
+
+            },
+            {
+                icon: LaunchOutlinedIcon,
+                content: "Truy cập trang Landmaps.vn"
+
+            }
+        ]
+    }
+]
 
 export default function Account() {
     const [showLoginstatus, setLoginstatus] = React.useState(true);
@@ -67,7 +119,6 @@ export default function Account() {
                                 {!showEmail && <Typography sx={{ fontWeight: "400", fontSize: "16px", color: "#596979" }}>Vui lòng đăng nhập để đồng bộ trải nghiệm!</Typography>}
                                 {showEmail && <Typography sx={{ fontWeight: "400", fontSize: "16px", color: "#596979" }}>duyen.nguyen@gmail.com</Typography>}
                             </div>
-
                         </div>
                         {showLoginstatus && <Button
                             onClick={login}
@@ -86,18 +137,13 @@ export default function Account() {
                             Đăng nhập
                         </Button>}
                     </Box>
+                    {
+                        groupList && groupList.map((item, index) =>
+                            <BasicList schema={item} key={index}>
 
-                    <Typography sx={{ fontWeight: "400", fontSize: "14px", margin: "5px", mt: 3, mb: 3 }}>GIỚI THIỆU & PHẢN HỒI</Typography>
-                    <BasicList DisplayIcon={ErrorOutlineIcon} content={"Giới thiệu trang"} divider={true} />
-                    <BasicList DisplayIcon={NoteAltOutlinedIcon} content={"Hướng dẫn sử dụng"} divider={true} />
-                    <BasicList DisplayIcon={HelpOutlineOutlinedIcon} content={"Câu hỏi thường gặp"} divider={true} />
-                    <BasicList DisplayIcon={StarOutlineOutlinedIcon} content={"Đánh giá "} divider={true} />
-                    <BasicList DisplayIcon={ChatBubbleOutlineOutlinedIcon} content={"Gửi góp ý cho nhà phát triển"} divider={false} />
-                    <Typography sx={{ fontWeight: "400", fontSize: "14px", margin: "5px", mt: 3, mb: 3 }}>CÀI ĐẶT</Typography>
-                    <BasicList DisplayIcon={SettingsOutlinedIcon} content={"Cài đặt ngôn ngữ"} divider={true} />
-                    <BasicList DisplayIcon={LaunchOutlinedIcon} content={"Truy cập trang Landmaps.vn"} divider={false} />
-
-
+                            </BasicList>
+                        )
+                    }
 
                 </Box>
                 <LabelBottomNavigation />
